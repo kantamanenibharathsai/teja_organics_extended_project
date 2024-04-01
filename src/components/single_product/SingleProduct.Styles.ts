@@ -1,8 +1,8 @@
-const landingPageStyles = {
+const singleProductStyles = {
   mainContainer: {
-    minHeight: "100vh",
     width: "100%",
     position: "relative",
+    // border: "7px solid red",
   },
 
   carouselAccordionParentContainer: {
@@ -57,12 +57,20 @@ const landingPageStyles = {
     zIndex: 0,
     top: 0,
     right: 0,
+    opacity: 1,
     display: { xs: "block", lg: "none" },
   },
 
   backgroundModalContainerClosed: {
-    height: "100vh",
+    height: "auto",
     width: 0,
+    opacity: 0,
+    backgroundColor: "rgba(0,0,0,0.6)",
+    transition: "0s ease all",
+    position: "absolute",
+    zIndex: 0,
+    top: 0,
+    right: 0,
     display: { xs: "block", lg: "none" },
   },
 
@@ -132,7 +140,6 @@ const landingPageStyles = {
 
   rightSideDrawer: {
     height: "100%",
-    // width: { xs: "75%", sm: "48%", md: "30%" },
     width: "0px",
     position: "absolute",
     zIndex: 2,
@@ -150,7 +157,6 @@ const landingPageStyles = {
 
   rightSideDrawerOpened: {
     height: "100%",
-    // width: { xs: "75%", sm: "48%", md: "30%" },
     width: "250px",
     position: "absolute",
     zIndex: 2,
@@ -164,7 +170,6 @@ const landingPageStyles = {
     justifyContent: "center",
     boxShadow:
       "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-      border: "5px solid yellow"
   },
 
   rightSideDrawerChildOpened: {
@@ -176,7 +181,6 @@ const landingPageStyles = {
     justifyContent: "space-between",
     transition: "2s ease all",
     opacity: 1,
-    // border: "2px solid red",
   },
 
   rightSideDrawerChildClosed: {
@@ -188,7 +192,6 @@ const landingPageStyles = {
     justifyContent: "space-between",
     transition: "2s ease all",
     opacity: 0,
-    // border: "2px solid red",
   },
 
   tabsUnorderedListContainer: {
@@ -267,4 +270,4 @@ const landingPageStyles = {
   },
 };
 
-export default landingPageStyles;
+export default singleProductStyles;

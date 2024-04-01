@@ -166,6 +166,7 @@ const navbarStyles = {
 
   browseCategoryContainer: {
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     height: "inherit",
@@ -201,7 +202,7 @@ const navbarStyles = {
     color: "#FFFFFF",
   },
 
-  accordionsDropDownContainer: {
+  accordionsDropDownContainerOpen: {
     position: "absolute",
     top: "50px",
     display: "flex",
@@ -210,6 +211,27 @@ const navbarStyles = {
     // height: "400px",
     width: { xs: "99%", sm: "100%", lg: "300px" },
     border: "1px solid #5FA800",
+    transition: "4s ease all",
+    // height: "auto",
+    // maxHeight: "auto",
+    // overflowY: "auto",
+    opacity: 1,
+  },
+
+  accordionsDropDownContainerClose: {
+    position: "absolute",
+    top: "50px",
+    display: "flex",
+    zIndex: 4,
+    flexDirection: "column",
+    // height: "400px",
+    width: { xs: "99%", sm: "100%", lg: "300px" },
+    border: "1px solid #5FA800",
+    transition: "4s ease all",
+    opacity: 0,
+    // height: "0px",
+    // maxHeight: "auto",
+    // overflowY: "auto",
   },
 
   bottomTabsUnorderedListContainer: {
@@ -222,6 +244,7 @@ const navbarStyles = {
     width: "68%",
     gap: 1.5,
     justifyContent: "space-between",
+    // border: "2px solid red",
   },
 
   tabListItem: {
@@ -255,7 +278,7 @@ const navbarStyles = {
     flexDirection: "column",
     gap: 3,
     width: { xs: "97%", sm: "90%", md: "90%" },
-    margin: "auto",
+    margin: "auto",   
   },
 
   modalTextFieldContainer: {

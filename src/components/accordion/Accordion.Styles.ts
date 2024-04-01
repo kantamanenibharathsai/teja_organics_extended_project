@@ -33,6 +33,7 @@ const accordionStyles = {
     pl: "2.8rem",
     font: "500 13px Poppins",
     color: "#32373C",
+    background: "#fff",
   },
 
   arrowIconButton: {

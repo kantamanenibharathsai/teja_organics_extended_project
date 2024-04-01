@@ -7,6 +7,9 @@ import { accordionBrowseCategoryData } from "../../utils/typescript/NavbarData"
 import { useState } from "react";
 import Accordion from "../accordion/Accordion";
 import CloseIcon from '@mui/icons-material/Close';
+import { useDispatch } from "react-redux";
+import { loginReducer } from "../../redux/reducers/LoginSliceReducer";
+import { AppDispatch } from "../../redux/store/Store";
 
 
 interface IState {
@@ -15,6 +18,7 @@ interface IState {
 }
 
 const Navbar = () => {
+    const dispatch = useDispatch<AppDispatch>();
     const [isBrowseCategoryClicked, setIsBrowseCategoryClicked] = useState<IState["isBrowseCategoryClicked"]>(false);
     const [isMobileSearchIconContainerClicked, setIsMobileSearchIconContainerClicked] = useState<IState["isMobileSearchIconContainerClicked"]>(false);
 
@@ -31,6 +35,10 @@ const Navbar = () => {
 
     const modalCloseIconBtnHandler = () => {
         setIsMobileSearchIconContainerClicked(false)
+    }
+
+    const loginBtnHandler = () => {
+        dispatch(loginReducer(true));
     }
 
     return (
@@ -79,7 +87,7 @@ const Navbar = () => {
                                     <Typography sx={navbarStyles.phoneNumStyle}>+91-9390538942</Typography>
                                 </Stack>
                             </Stack>
-                            <Button disableElevation disableRipple disableFocusRipple disableTouchRipple sx={navbarStyles.loginButtonStyle}>LOGIN</Button>
+                            <Button disableElevation disableRipple disableFocusRipple disableTouchRipple sx={navbarStyles.loginButtonStyle} onClick={loginBtnHandler}>LOGIN</Button>
                         </Stack>
                     </Stack>
                 </Box>
@@ -90,11 +98,11 @@ const Navbar = () => {
                                 <Box component="img" alt="browse-category-image" src={hamburgerIconImage} sx={navbarStyles.browseCategoryImage} />
                                 <Typography sx={navbarStyles.tabsText}>Browse category</Typography>
                             </Box>
-                            {isBrowseCategoryClicked && (<Box sx={navbarStyles.accordionsDropDownContainer}>
+                            <Box sx={isBrowseCategoryClicked ? navbarStyles.accordionsDropDownContainerOpen : navbarStyles.accordionsDropDownContainerClose}>
                                 {accordionBrowseCategoryData.map(eachCategory => (
                                     <Accordion eachCategory={eachCategory} key={eachCategory.categoryId} />
                                 ))}
-                            </Box>)}
+                            </Box>
                         </Box>
                         <Box sx={navbarStyles.searchContainerMobile} onClick={mobileSearchContainerHandler}>
                             <Box component={"img"} alt="search-icon" src={searchIconImage} sx={navbarStyles.searchIcon} />
@@ -123,7 +131,7 @@ const Navbar = () => {
                     </Box>
                 </Box>
             </Box >
-            <Box sx={{...navbarStyles.modalContainer, display: isMobileSearchIconContainerClicked ? {xs: "block", lg: "none"} : "none"}}>
+            <Box sx={{ ...navbarStyles.modalContainer, display: isMobileSearchIconContainerClicked ? { xs: "block", lg: "none" } : "none" }}>
                 <Box sx={navbarStyles.mobileSearchBarCloseiconContainer}>
                     <Stack direction={"row"} alignItems={"center"} justifyContent={"flex-end"}>
                         <IconButton onClick={modalCloseIconBtnHandler} disableFocusRipple disableRipple disableTouchRipple sx={navbarStyles.closeIconButton}>

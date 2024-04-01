@@ -13,7 +13,7 @@ const carouselStyles = {
     scrollSnapType: "x mandatory",
     scrollBehavior: "smooth",
     boxShadow: "0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25)",
-    height: { lg: "440px" },
+    height: { lg: "420px" },
     width: { lg: "100%" },
   },
 
