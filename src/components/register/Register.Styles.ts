@@ -1,16 +1,15 @@
-const loginStyles = {
+const registerStyles = {
   cardOpenParentContainer: {
     position: "absolute",
     top: "190px",
     zIndex: 2,
-    transition: "0.7s ease all",
+    transition: "1s ease all",
     width: "495px",
     overflowX: "hidden",
     right: 0,
     display: "flex",
     justifyContent: "flex-end",
     opacity: 1,
-    height: "auto",
   },
 
   cardParentCloseContainer: {
@@ -18,7 +17,7 @@ const loginStyles = {
     top: "190px",
     width: 0,
     zIndex: 2,
-    transition: "0.7s ease all",
+    transition: "1s ease all",
     overflowX: "hidden",
     right: 0,
     height: "480px",
@@ -41,7 +40,7 @@ const loginStyles = {
     width: "450px",
     overflowX: "hidden",
     opacity: 1,
-    transition: "0.7s ease all",
+    transition: "1s ease all",
   },
 
   cardCloseContainer: {
@@ -59,7 +58,7 @@ const loginStyles = {
     justifyContent: "center",
     width: 0,
     overflowX: "hidden",
-    transition: "0.7s ease all",
+    transition: "1s ease all",
     opcaity: 0,
   },
 
@@ -72,7 +71,7 @@ const loginStyles = {
     right: 0,
     backgroundColor: "#fff",
     overflowX: "hidden",
-    transition: "0.7s ease all",
+    transition: "1s ease all",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -89,7 +88,7 @@ const loginStyles = {
     right: 0,
     backgroundColor: "#fff",
     overflowX: "hidden",
-    transition: "0.7s ease all",
+    transition: "1s ease all",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -129,16 +128,24 @@ const loginStyles = {
     border: "none",
     outline: "none",
     font: "500 15px Montserrat",
-    color: "#32373C",
+    color: "#000",
     width: "100%",
   },
 
-  rememberMe: {
-    font: "500 17px Montserrat",
+  privacyPolicy: {
+    font: "500 14px Poppins",
     color: "#32373C",
   },
 
-  loginBtn: {
+  clickHere: {
+    font: "500 14px Poppins",
+    color: "#056839",
+    borderBottom: "1px solid #056839",
+    cursor: "pointer",
+    mt: 0.5,
+  },
+
+  registerBtn: {
     background: "#056839",
     height: "44px",
     alignSelf: "strech",
@@ -161,7 +168,7 @@ const loginStyles = {
   },
 
   clickHereText: {
-    font: "500 14px Montserrat",
+    font: "500 14px Poppins",
     color: "#056839",
     cursor: "pointer",
   },
@@ -180,7 +187,7 @@ const loginStyles = {
     cursor: "pointer",
     zIndex: 2,
     border: 0,
-    transition: "0.7s ease all",
+    transition: "1s ease all",
     "&:hover": {
       background: "#88BB22",
       width: "45px",
@@ -209,7 +216,7 @@ const loginStyles = {
     cursor: "pointer",
     zIndex: 2,
     border: 0,
-    transition: "0.7s ease all",
+    transition: "1s ease all",
     "&:hover": {
       background: "#88BB22",
       width: "45px",
@@ -229,10 +236,15 @@ const loginStyles = {
     color: "#fff",
   },
 
+  alreadyRegistered: {
+    font: "500 14px Poppins",
+    color: "#32373C",
+  },
+
   errorMsg: {
     color: "red",
     font: "200 11px Poppins",
   },
 };
 
-export default loginStyles;
+export default registerStyles;

@@ -17,7 +17,7 @@ const latestNewsStyles = {
     display: "flex",
     flexDirection: { xs: "column", lg: "row" },
     boxShadow: `rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px`,
-    width: { xs: "100%", sm: "57%", md: "40%" },
+    width: { xs: "100%", sm: "57%", md: "40%", lg: "48%", xl: "auto" },
     borderRadius: "12px",
     alignItems: { xs: "center" },
   },

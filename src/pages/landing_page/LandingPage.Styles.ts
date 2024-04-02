@@ -37,6 +37,9 @@ const landingPageStyles = {
     width: { xs: "40px", lg: "45px" },
     p: 0,
     cursor: "pointer",
+    outline: "none",
+    border: "none"
+    // border: "3px solid red",
   },
 
   displayInMobile: {
@@ -164,7 +167,7 @@ const landingPageStyles = {
     justifyContent: "center",
     boxShadow:
       "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-      border: "5px solid yellow"
+    border: "5px solid yellow",
   },
 
   rightSideDrawerChildOpened: {

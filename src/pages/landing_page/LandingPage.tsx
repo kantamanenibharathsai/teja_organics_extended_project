@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/Navbar"
 import Carousel from "../../components/carousel/Carousel"
 import { userProfileImageUrl } from "../../assets/home_images/HomeImages"
 import sidebarMobileImg from "../../assets/home_images/sidebarMobileImg.png"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { facebookImg, instagramImg, linkedinImg, pinInterestImg, twitterImg } from "../../assets/navbar_images/navbarImages"
 import CloseIcon from '@mui/icons-material/Close';
 import { bestSellersCardsList } from "../../utils/typescript/HomeData"
@@ -15,9 +15,12 @@ import DealsOftheDay from "../../components/deal_of_the_day/DealOfTheDay"
 import Testmonials from "../../components/testimonials/Testimonials"
 import Footer from "../../components/footer/Footer"
 import LatestNews from "../../components/latest_news/LatestNews"
-import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store/Store"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../../redux/store/Store"
 import Login from "../../components/login/Login"
+import { loginReducer, mobileLoginReducer } from "../../redux/reducers/LoginSliceReducer"
+import Register from "../../components/register/Register"
+import { useNavigate } from "react-router-dom"
 
 interface IState {
     isRightSideDrawerDisplayed: boolean
@@ -25,7 +28,11 @@ interface IState {
 
 
 const LandingPage = () => {
-    const isLoginCardDisplayed = useSelector((state: RootState) => state.login.isLoginCardOpened);
+    // const isLoginCardDisplayed = useSelector((state: RootState) => state.login.isLoginCardOpened);
+    const isMobileLoginCardDisplayed = useSelector((state: RootState) => state.login.isMobileLoginCardOpened);
+    const isMobileRegisterCardDisplayed = useSelector((state: RootState) => state.login.isMobileRegisterCardOpened);
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
     const [isRightSideDrawerDisplayed, setIsRightSideDrawerDisplayed] = useState<IState["isRightSideDrawerDisplayed"]>(false)
 
 
@@ -37,6 +44,37 @@ const LandingPage = () => {
         setIsRightSideDrawerDisplayed(false)
     }
 
+    const userProfileEventHandler = () => {
+        console.log(window.innerWidth);
+        if (window.innerWidth > 1200) dispatch(loginReducer(true));
+        else {
+            dispatch(mobileLoginReducer(true));
+            navigate("/mobileLogin");
+        }
+
+    }
+
+    const handleResize = () => {
+        if (window.innerWidth < 1200 && isMobileLoginCardDisplayed) {
+            navigate("/mobileLogin")
+        }
+        else if (window.innerWidth < 1200 && isMobileRegisterCardDisplayed) {
+            navigate("/mobileRegister")
+        }
+        else {
+            navigate("/")
+        }
+    }
+
+    // create an event listener
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    })
+
     return (
         <Box sx={landingPageStyles.mainContainer}>
             <Navbar />
@@ -47,7 +85,7 @@ const LandingPage = () => {
                         <Box sx={{ ...landingPageStyles.backgroundColorContainer, ...landingPageStyles.displayInMobile }} onClick={userProfileRightSideDrawerHandler}>
                             <Box component="img" sx={landingPageStyles.userProfileImage} src={sidebarMobileImg} alt="sidebar-image" />
                         </Box>
-                        <Box sx={landingPageStyles.backgroundColorContainer}>
+                        <Box component="button" sx={landingPageStyles.backgroundColorContainer} onClick={userProfileEventHandler}>
                             <Box component="img" sx={landingPageStyles.userProfileImage} src={userProfileImageUrl} alt="user-profile-image" />
                         </Box>
                     </Box>
@@ -110,6 +148,7 @@ const LandingPage = () => {
 
             </Box>
             <Login />
+            <Register />
         </Box>
     )
 }
