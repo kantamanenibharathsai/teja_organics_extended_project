@@ -155,6 +155,11 @@ const mobileLoginStyles = {
     height: "15px",
     color: "#fff",
   },
+
+  errorMsg: {
+    color: "red",
+    font: "200 11px Poppins",
+  },
 };
 
 export default mobileLoginStyles;

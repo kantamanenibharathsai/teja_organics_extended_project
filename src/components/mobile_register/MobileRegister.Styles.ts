@@ -173,6 +173,17 @@ const mobileRegisterStyles = {
     cursor: "pointer",
     mt: 0.5,
   },
+
+  errorMsg: {
+    color: "red",
+    font: "200 11px Poppins",
+  },
+
+  registrationSuccessMsg: {
+    color: "blue",
+    font: "200 16px Poppins",
+    mt: 2,
+  },
 };
 
 export default mobileRegisterStyles;

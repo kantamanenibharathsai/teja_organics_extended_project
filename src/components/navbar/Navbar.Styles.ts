@@ -257,6 +257,7 @@ const navbarStyles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    cursor: "pointer",
     "&:last-child": {
       borderRight: "0px",
     },
@@ -278,7 +279,7 @@ const navbarStyles = {
     flexDirection: "column",
     gap: 3,
     width: { xs: "97%", sm: "90%", md: "90%" },
-    margin: "auto",   
+    margin: "auto",
   },
 
   modalTextFieldContainer: {
@@ -297,6 +298,23 @@ const navbarStyles = {
 
   closeIcon: {
     color: "#FFFFFF",
+  },
+
+  loggedInUserImage: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "8px",
+    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+  },
+
+  profileText: {
+    font: "500 14px Poppins",
+    color: "#056839",
+  },
+
+  userName: {
+    font: "500 15px Poppins",
+    color: "#1D2027",
   },
 };
 

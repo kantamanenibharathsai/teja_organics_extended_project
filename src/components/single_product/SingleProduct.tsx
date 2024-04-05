@@ -12,6 +12,8 @@ import BestSellerCard from "../../components/best_sellers_card/BestSellersCard"
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import Footer from "../../components/footer/Footer"
 import SinglePoductDetailsReviews from "../product_reviews_single_product/ProductReviewsSingleProduct"
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store/Store"
 
 
 interface IState {
@@ -21,7 +23,7 @@ interface IState {
 
 const SingleProduct = () => {
     const [isRightSideDrawerDisplayed, setIsRightSideDrawerDisplayed] = useState<IState["isRightSideDrawerDisplayed"]>(false)
-
+    const singleProductDetailsObj = useSelector((state: RootState) => state.singleProduct.singleProductDetails)
 
     const userProfileRightSideDrawerHandler = () => {
         setIsRightSideDrawerDisplayed(true)

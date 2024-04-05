@@ -245,6 +245,12 @@ const registerStyles = {
     color: "red",
     font: "200 11px Poppins",
   },
+
+  registrationSuccessMsg: {
+    color: "#000",
+    font: "200 15px Poppins",
+    mt: 2,
+  },
 };
 
 export default registerStyles;

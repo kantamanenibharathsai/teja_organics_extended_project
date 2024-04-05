@@ -5,6 +5,8 @@ import { AppDispatch, RootState } from "../../redux/store/Store";
 import registerStyles from "./Register.Styles";
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -23,7 +25,12 @@ const Register = () => {
         formState: { errors },
     } = useForm<FormData>();
 
+    const [userNameErrMsg, setUserNameErrMsg] = useState<string>("");
+    const [emailErrMsg, setEmailErrMsg] = useState<string>("");
+    const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState<boolean>(false);
+
     const dispatch = useDispatch<AppDispatch>()
+    const navigate = useNavigate()
     const isRegisterCardDisplayed = useSelector((state: RootState) => state.login.isRegisterCardOpened);
 
 
@@ -38,13 +45,34 @@ const Register = () => {
     }
 
     const onSubmit = (data: FormData) => {
-        const existingData = localStorage.getItem("formData");
-        const formDataArray = existingData ? JSON.parse(existingData) : [];
-        formDataArray.push(data);
-        localStorage.setItem("formData", JSON.stringify(formDataArray));
-        reset();
-        console.table(data)
-        dispatch(loginReducer(true))
+        const storedDataString = localStorage.getItem("formData");
+        const existingData = storedDataString ? JSON.parse(storedDataString) : [];
+        let isUserNameAlreadyExist = false;
+        let isEmailAlreadyExist = false;
+        existingData.forEach((eachCredentials: FormData) => {
+            if (eachCredentials.username.toLowerCase() === data.username.toLowerCase()) {
+                isUserNameAlreadyExist = true;
+            }
+            if (eachCredentials.email.toLowerCase() === data.email.toLowerCase()) {
+                isEmailAlreadyExist = true;
+            }
+        });
+        console.log(isUserNameAlreadyExist, isEmailAlreadyExist)
+        if (isUserNameAlreadyExist) {
+            setUserNameErrMsg("*username already exists")
+        }
+        if (isEmailAlreadyExist) {
+            setEmailErrMsg("*email already exists")
+        }
+        else {
+            existingData.push(data);
+            localStorage.setItem("formData", JSON.stringify(existingData));
+            reset();
+            console.table(data)
+            dispatch(loginReducer(true))
+            setIsRegistrationSuccessful(true)
+            // navigate("/mobileLogin")
+        }
     };
 
     return (
@@ -77,6 +105,7 @@ const Register = () => {
                             />
                         </Box>
                         {errors.username?.message && <Typography sx={registerStyles.errorMsg}>{errors.username?.message}</Typography>}
+                        {userNameErrMsg && <Typography sx={registerStyles.errorMsg}>{userNameErrMsg}</Typography>}
                         <Box sx={registerStyles.labelInputContainer}>
                             <Box component={"label"} sx={registerStyles.label} htmlFor="emailAddress">
                                 Email Address *
@@ -97,6 +126,7 @@ const Register = () => {
                             />
                         </Box>
                         {errors.email?.message && <Typography sx={registerStyles.errorMsg}>{errors.email?.message}</Typography>}
+                        {emailErrMsg && <Typography sx={registerStyles.errorMsg}>{emailErrMsg}</Typography>}
                         <Box sx={registerStyles.labelInputContainer}>
                             <Box component={"label"} sx={registerStyles.label} htmlFor="password">
                                 Password *
@@ -127,6 +157,7 @@ const Register = () => {
                     <Typography sx={registerStyles.alreadyRegistered}>Already Registered?</Typography>
                     <Typography onClick={clickHereHandler} sx={{ ...registerStyles.clickHere, marginTop: 0 }}>Click here to login</Typography>
                 </Stack>
+                {isRegistrationSuccessful && <Typography sx={registerStyles.registrationSuccessMsg}>Registration Successful. Please Login</Typography>}
             </Box>
         </Box>
     )

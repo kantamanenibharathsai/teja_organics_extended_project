@@ -1,9 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import LoginSliceReducer from "../reducers/LoginSliceReducer";
+import SingleProductReducer from "../reducers/SingleProductReducer";
+import CartSliceReducer from "../reducers/CartSliceReducer";
+import NavbarTabsReducer from "../reducers/NavbarTabsReducer";
 
 export const Store = configureStore({
   reducer: {
-    login : LoginSliceReducer
+    login: LoginSliceReducer,
+    singleProduct: SingleProductReducer,
+    cart: CartSliceReducer,
+    navbarTabs: NavbarTabsReducer,
   },
 });
 

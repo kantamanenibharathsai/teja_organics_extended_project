@@ -7,6 +7,11 @@ import { Provider } from 'react-redux';
 import { Store } from "./redux/store/Store"
 import MobileLogin from './components/mobile_login/MobileLogin';
 import MobileRegister from './components/mobile_register/MobileRegister';
+import Cart from './components/cart/Cart';
+import Contactpage from './pages/contact_page/Contact';
+import TestimonialsPage from './pages/testimonials_page/TestimonialsPage';
+import AboutUs from './pages/about_us/AboutUs';
+
 
 function App() {
   return (
@@ -14,9 +19,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<LandingPage />} path="/" />
-          <Route element={<SingleProduct />} path="/single-product" />
+          <Route element={<SingleProduct />} path="/singleProduct/:id" />
           <Route element={<MobileLogin />} path="/mobileLogin" />
           <Route element={<MobileRegister />} path="/mobileRegister" />
+          <Route element={<Cart />} path="/cart" />
+          <Route element={<Contactpage />} path="/contact" />
+          <Route element={<TestimonialsPage />} path="/testimonials" />
+          <Route element={<AboutUs />} path="/aboutus" />
         </Routes>
       </BrowserRouter>
     </Provider>

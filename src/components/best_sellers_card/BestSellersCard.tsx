@@ -2,6 +2,11 @@ import { Box, Button, Rating, Stack, Typography } from "@mui/material"
 import bestSellersCardStyles from "./BestSellersCard.Styles"
 import heartImgIcon from "../../assets/home_images/heartImageIcon.png"
 import { BestSellersCardInterface } from "../../utils/typescript/HomeData"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../../redux/store/Store"
+import { singleProductReducer } from "../../redux/reducers/SingleProductReducer"
+import { useNavigate } from "react-router-dom"
+import { addToCart, cartDecrement, cartIncrement } from "../../redux/reducers/CartSliceReducer"
 
 
 interface MyProps {
@@ -10,11 +15,42 @@ interface MyProps {
 
 
 const BestSellerCard = ({ eachProduct }: MyProps) => {
-    const { productId, productName, productImg, productRating } = eachProduct
+    const requiredCartProduct = useSelector((state: RootState) => state.cart.cartProducts.find(product => product.productId === eachProduct.productId))
+    // console.log(requiredCartProduct);
+    const { productId, productName, productImg, productRating, } = eachProduct;
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
+
+    const handleBestSellerCard = (name: string, image: string) => {
+        dispatch(singleProductReducer({ productName: name, productImg: image }));
+        navigate(`/singleProduct/${productId}`)
+    }
+
+
+    const handleIncrement = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        console.log(productId)
+        dispatch(cartIncrement(productId))
+
+    };
+
+    const handleDecrement = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        console.log(productId)
+        dispatch(cartDecrement(productId))
+
+    };
+
+    const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        dispatch(addToCart(eachProduct))
+
+    };
 
     return (
-        <Box sx={bestSellersCardStyles.cardContainer}>
+
+        <Box sx={bestSellersCardStyles.cardContainer} onClick={() => handleBestSellerCard(productName, productImg)}>
             <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
                 <Typography sx={bestSellersCardStyles.organicFoodText}>Organic Food</Typography>
                 <Box component={"img"} src={heartImgIcon} alt="heart-image-icon" sx={bestSellersCardStyles.favoriteIconImg} />
@@ -30,11 +66,11 @@ const BestSellerCard = ({ eachProduct }: MyProps) => {
                 </Stack>
                 <Stack direction={"row"} justifyContent={"center"} alignItems={"center"}>
                     <Stack direction={"row"} justifyContent={"center"} alignItems={"center"} gap={0} sx={bestSellersCardStyles.increDecreBtnsStack}>
-                        <Button disableElevation disableFocusRipple disableRipple disableTouchRipple sx={{...bestSellersCardStyles.increDecreBtn, ...bestSellersCardStyles.incrementBtn}}>-</Button>
-                        <Typography sx={bestSellersCardStyles.productQuantity}>1</Typography>
-                        <Button disableElevation disableFocusRipple disableRipple disableTouchRipple sx={bestSellersCardStyles.increDecreBtn}>+</Button>
+                        <Button disabled={requiredCartProduct?.productQuantity === 0} onClick={handleDecrement} disableElevation disableFocusRipple disableRipple disableTouchRipple sx={{ ...bestSellersCardStyles.increDecreBtn, ...bestSellersCardStyles.incrementBtn }}>-</Button>
+                        <Typography sx={bestSellersCardStyles.productQuantity}>{requiredCartProduct ? requiredCartProduct.productQuantity : 0}</Typography>
+                        <Button onClick={handleIncrement} disabled={requiredCartProduct?.productQuantity === 0} disableElevation disableFocusRipple disableRipple disableTouchRipple sx={bestSellersCardStyles.increDecreBtn}>+</Button>
                     </Stack>
-                    <Button disableElevation disableFocusRipple disableRipple disableTouchRipple sx={bestSellersCardStyles.addToCartBtn}>Add to Cart</Button>
+                    <Button onClick={handleAddToCart} disableElevation disableFocusRipple disableRipple disableTouchRipple sx={bestSellersCardStyles.addToCartBtn}>Add to Cart</Button>
                 </Stack>
             </Stack>
         </Box>

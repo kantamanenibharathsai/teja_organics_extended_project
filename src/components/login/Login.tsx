@@ -6,6 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { loginReducer, registerReducer } from "../../redux/reducers/LoginSliceReducer";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface FormData {
     email: string;
@@ -16,6 +17,10 @@ const Login = () => {
     const isLoginCardDisplayed = useSelector((state: RootState) => state.login.isLoginCardOpened);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
+
+    const [checked, setChecked] = useState(false);
+    const loggedInUserCredentialsStringifiedData = localStorage.getItem("loggedInUserCredentials")
+    const parsedDataCredentials = loggedInUserCredentialsStringifiedData ? JSON.parse(loggedInUserCredentialsStringifiedData) : null;
 
     const {
         register,
@@ -40,9 +45,13 @@ const Login = () => {
                 userDetailsObj.email === data.email && userDetailsObj.password === data.password
         );
         if (user) {
+            localStorage.setItem("succLoggedInUserDetails", JSON.stringify(user));
             setTimeout(() => {
                 navigate("/");
             }, 10);
+            if (checked) {
+                localStorage.setItem("loggedInUserCredentials", JSON.stringify(user))
+            }
         }
         reset();
     };
@@ -75,11 +84,9 @@ const Login = () => {
                                         message: "* Invalid Email Address",
                                     },
                                 })}
-
                             />
                         </Box>
                         {errors.email?.message && <Typography sx={loginStyles.errorMsg}>{errors.email?.message}</Typography>}
-
                         <Box sx={loginStyles.labelInputContainer}>
                             <Box component={"label"} sx={loginStyles.label}>
                                 Password *
@@ -96,11 +103,9 @@ const Login = () => {
                                             "* Password must contain at least one uppercase letter, one lowercase letter and one number, and must be between 6 and 15 characters long.",
                                     },
                                 })}
-
                             />
                         </Box>
                         {errors.password?.message && <Typography sx={loginStyles.errorMsg}>{errors.password?.message}</Typography>}
-
                         <Stack direction={"row"} alignItems={"center"}>
                             <Checkbox disableFocusRipple disableRipple disableTouchRipple defaultChecked color="default" />
                             <Typography sx={loginStyles.rememberMe}>Remember me</Typography>

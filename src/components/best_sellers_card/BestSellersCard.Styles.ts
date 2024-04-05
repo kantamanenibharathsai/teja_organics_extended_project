@@ -9,6 +9,7 @@ const bestSellersCardStyles = {
     gap: 1.8,
     borderRadius: 2,
     scrollSnapAlign: "start",
+    cursor: "pointer",
   },
 
   organicFoodText: {

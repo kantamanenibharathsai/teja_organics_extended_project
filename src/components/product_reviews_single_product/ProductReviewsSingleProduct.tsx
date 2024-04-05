@@ -2,17 +2,20 @@ import { Box, Button, Divider, Rating, Stack, Typography } from "@mui/material"
 import singlePoductDetailsReviewStyles from "./ProductReviewsSingleProduct.Styles"
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { singleProductImg, userReviewProfileImg } from "../../assets/single_product/SingleProductImages"
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store/Store";
 
 
 
 const SinglePoductDetailsReviews = () => {
+    const singleProductDetailsObj = useSelector((state: RootState) => state.singleProduct.singleProductDetails)
     return (
         <Box sx={singlePoductDetailsReviewStyles.body}>
             <Box sx={singlePoductDetailsReviewStyles.container}>
                 <Box sx={singlePoductDetailsReviewStyles.container1}>
                     <Box sx={singlePoductDetailsReviewStyles.container2}>
                         <Box sx={singlePoductDetailsReviewStyles.rightcontainer}>
-                            <Typography sx={singlePoductDetailsReviewStyles.eachproducttitle}> Arnica Pain Relief Massage Oil 100ml </Typography> <Box sx={singlePoductDetailsReviewStyles.rupeecontainer}>
+                            <Typography sx={singlePoductDetailsReviewStyles.eachproducttitle}> {singleProductDetailsObj.productName} </Typography> <Box sx={singlePoductDetailsReviewStyles.rupeecontainer}>
                                 <Box sx={singlePoductDetailsReviewStyles.currency}>
                                     <CurrencyRupeeIcon sx={singlePoductDetailsReviewStyles.ruppeicon} />
                                     <Typography sx={singlePoductDetailsReviewStyles.rupee}>340.00</Typography>
@@ -32,7 +35,7 @@ const SinglePoductDetailsReviews = () => {
                             </Box>
                         </Box>
                         <Box sx={singlePoductDetailsReviewStyles.productcontainer}>
-                            <Box component={"img"} src={singleProductImg} sx={singlePoductDetailsReviewStyles.product} />
+                            <Box component={"img"} src={singleProductDetailsObj.productImg} sx={singlePoductDetailsReviewStyles.product} />
                         </Box>
                     </Box>
                     <Box sx={singlePoductDetailsReviewStyles.descriptioncontainer}>

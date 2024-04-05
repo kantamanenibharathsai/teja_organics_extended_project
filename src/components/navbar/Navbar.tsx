@@ -1,15 +1,17 @@
 import { Box, Button, Divider, IconButton, InputAdornment, Stack, TextField, Typography } from "@mui/material"
 import navbarStyles from "./Navbar.Styles"
-import { pinInterestImg, facebookImg, twitterImg, linkedinImg, instagramImg, tejaOrganicsLogo, phoneCallImg, } from "../../assets/navbar_images/navbarImages";
+import { pinInterestImg, facebookImg, twitterImg, linkedinImg, instagramImg, tejaOrganicsLogo, phoneCallImg, loggedInUserProfilePic } from "../../assets/navbar_images/navbarImages";
 import searchIconImage from "../../assets/navbar_images/searchIcon.png"
 import hamburgerIconImage from "../../assets/navbar_images/hamburgerIcon.png"
 import { accordionBrowseCategoryData } from "../../utils/typescript/NavbarData"
 import { useState } from "react";
 import Accordion from "../accordion/Accordion";
 import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginReducer } from "../../redux/reducers/LoginSliceReducer";
-import { AppDispatch } from "../../redux/store/Store";
+import { AppDispatch, RootState } from "../../redux/store/Store";
+import { navbarTabsReducer } from "../../redux/reducers/NavbarTabsReducer";
+import { useNavigate } from "react-router-dom";
 
 
 interface IState {
@@ -18,7 +20,11 @@ interface IState {
 }
 
 const Navbar = () => {
+    const activeTabItem = useSelector((state: RootState) => state.navbarTabs.currentActiveTab);
+    const succLoggedInUserDetailsStringifiedData = localStorage.getItem("succLoggedInUserDetails");
+    const parsedLoggedInUserCredentials = succLoggedInUserDetailsStringifiedData ? JSON.parse(succLoggedInUserDetailsStringifiedData) : null;
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate()
     const [isBrowseCategoryClicked, setIsBrowseCategoryClicked] = useState<IState["isBrowseCategoryClicked"]>(false);
     const [isMobileSearchIconContainerClicked, setIsMobileSearchIconContainerClicked] = useState<IState["isMobileSearchIconContainerClicked"]>(false);
 
@@ -39,6 +45,26 @@ const Navbar = () => {
 
     const loginBtnHandler = () => {
         dispatch(loginReducer(true));
+    }
+
+    const homeTabEventHandler = (tabName: string) => {
+        dispatch(navbarTabsReducer(tabName));
+        navigate("/");
+    }
+
+    const aboutTabEventHandler = (tabName: string) => {
+        dispatch(navbarTabsReducer(tabName))
+        navigate("/aboutus")
+    }
+
+    const testimonialsTabEventHandler = (tabName: string) => {
+        dispatch(navbarTabsReducer(tabName))
+        navigate("/testimonials")
+    }
+
+    const contactTabEventHandler = (tabName: string) => {
+        dispatch(navbarTabsReducer(tabName));
+        navigate("/contact")
     }
 
     return (
@@ -87,7 +113,16 @@ const Navbar = () => {
                                     <Typography sx={navbarStyles.phoneNumStyle}>+91-9390538942</Typography>
                                 </Stack>
                             </Stack>
-                            <Button disableElevation disableRipple disableFocusRipple disableTouchRipple sx={navbarStyles.loginButtonStyle} onClick={loginBtnHandler}>LOGIN</Button>
+                            {!parsedLoggedInUserCredentials && (<Button disableElevation disableRipple disableFocusRipple disableTouchRipple sx={navbarStyles.loginButtonStyle} onClick={loginBtnHandler}>LOGIN</Button>)}
+                            {parsedLoggedInUserCredentials && (
+                                <Stack direction={"row"} alignItems={"center"} gap={0.8} display={{ xs: "none", lg: "flex" }}>
+                                    <Box component={"img"} src={loggedInUserProfilePic} alt="loggedInUserProfilePic" sx={navbarStyles.loggedInUserImage} />
+                                    <Stack direction={"column"} gap={0.3}>
+                                        <Typography sx={navbarStyles.profileText}>Profile</Typography>
+                                        <Typography sx={navbarStyles.userName}>{parsedLoggedInUserCredentials.username}</Typography>
+                                    </Stack>
+                                </Stack>
+                            )}
                         </Stack>
                     </Stack>
                 </Box>
@@ -109,22 +144,22 @@ const Navbar = () => {
 
                         </Box>
                         <Box component="ul" sx={navbarStyles.bottomTabsUnorderedListContainer}>
-                            <Box component="li" sx={navbarStyles.tabListItem}>
+                            <Box component="li" sx={{ ...navbarStyles.tabListItem, background: activeTabItem === "Home" ? "#4aa14b" : "#88bb22" }} onClick={() => homeTabEventHandler("Home")}>
                                 Home
                             </Box>
-                            <Box component="li" sx={navbarStyles.tabListItem}>
+                            <Box component="li" sx={{ ...navbarStyles.tabListItem, background: activeTabItem === "About Us" ? "#4aa14b" : "#88bb22" }} onClick={() => aboutTabEventHandler("About Us")}>
                                 About Us
                             </Box>
-                            <Box component="li" sx={navbarStyles.tabListItem}>
+                            <Box component="li" sx={{ ...navbarStyles.tabListItem, background: activeTabItem === "Shop" ? "#4aa14b" : "#88bb22" }}>
                                 Shop
                             </Box>
-                            <Box component="li" sx={navbarStyles.tabListItem}>
+                            <Box component="li" sx={{ ...navbarStyles.tabListItem, background: activeTabItem === "Testimonals" ? "#4aa14b" : "#88bb22" }} onClick={() => testimonialsTabEventHandler("Testimonals")}>
                                 Testimonals
                             </Box>
-                            <Box component="li" sx={navbarStyles.tabListItem}>
+                            <Box component="li" sx={{ ...navbarStyles.tabListItem, background: activeTabItem === "Blog" ? "#4aa14b" : "#88bb22" }}>
                                 Blog
                             </Box>
-                            <Box component="li" sx={navbarStyles.tabListItem}>
+                            <Box component="li" sx={{ ...navbarStyles.tabListItem, background: activeTabItem === "Contact" ? "#4aa14b" : "#88bb22" }} onClick={() => contactTabEventHandler("Contact")}>
                                 Contact
                             </Box>
                         </Box>

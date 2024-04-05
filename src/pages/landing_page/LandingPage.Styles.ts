@@ -38,7 +38,8 @@ const landingPageStyles = {
     p: 0,
     cursor: "pointer",
     outline: "none",
-    border: "none"
+    border: "none",
+    position: "relative",
     // border: "3px solid red",
   },
 
@@ -49,6 +50,21 @@ const landingPageStyles = {
   userProfileImage: {
     width: { xs: "14.5px", lg: "16px" },
     height: { xs: "14.5px", lg: "16px" },
+  },
+
+  cartItemsCount: {
+    position: "absolute",
+    top: "7px",
+    right: "5px",
+    background: "#EB5757",
+    color: "#fff",
+    font: "500 12px Montserrat",
+    borderRadius: "50%",
+    width: "17px",
+    height: "17px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   backgroundModalContainerOpened: {

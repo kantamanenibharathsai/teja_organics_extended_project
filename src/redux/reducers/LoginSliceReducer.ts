@@ -2,9 +2,11 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoginCardOpened: false,
-  isMobileLoginCardOpened: true,
+  isMobileLoginCardOpened: false,
   isRegisterCardOpened: false,
   isMobileRegisterCardOpened: false,
+  isCartCardOpened: false,
+  isMobileCartOpened: false,
 };
 
 const LoginSlice = createSlice({
@@ -26,6 +28,14 @@ const LoginSlice = createSlice({
     mobileRegisterReducer: (state, action: PayloadAction<boolean>) => {
       state.isMobileRegisterCardOpened = action.payload;
     },
+
+    cartToggleReducer: (state, action: PayloadAction<boolean>) => {
+      state.isCartCardOpened = action.payload;
+    },
+
+    cartToggleMobileReducer: (state, action: PayloadAction<boolean>) => {
+      state.isMobileCartOpened = action.payload;
+    },
   },
 });
 
@@ -35,4 +45,6 @@ export const {
   mobileLoginReducer,
   registerReducer,
   mobileRegisterReducer,
+  cartToggleReducer,
+  cartToggleMobileReducer,
 } = LoginSlice.actions;

@@ -1,4 +1,4 @@
-import { Box, IconButton, Stack, Typography, } from "@mui/material"
+import { Box, Button, IconButton, Stack, Typography, } from "@mui/material"
 import landingPageStyles from "./LandingPage.Styles"
 import Navbar from "../../components/navbar/Navbar"
 import Carousel from "../../components/carousel/Carousel"
@@ -18,9 +18,11 @@ import LatestNews from "../../components/latest_news/LatestNews"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store/Store"
 import Login from "../../components/login/Login"
-import { loginReducer, mobileLoginReducer } from "../../redux/reducers/LoginSliceReducer"
+import { cartToggleMobileReducer, cartToggleReducer, loginReducer, mobileLoginReducer } from "../../redux/reducers/LoginSliceReducer"
 import Register from "../../components/register/Register"
 import { useNavigate } from "react-router-dom"
+import { cartImage } from "../../assets/home_images/HomeImages";
+import DesktopCart from "../../components/desktop_cart/DesktopCart"
 
 interface IState {
     isRightSideDrawerDisplayed: boolean
@@ -29,8 +31,11 @@ interface IState {
 
 const LandingPage = () => {
     // const isLoginCardDisplayed = useSelector((state: RootState) => state.login.isLoginCardOpened);
+    const succLoggedInUserDetailsStringifiedData = localStorage.getItem("succLoggedInUserDetails");
+    const parsedLoggedInUserCredentials = succLoggedInUserDetailsStringifiedData ? JSON.parse(succLoggedInUserDetailsStringifiedData) : null;
     const isMobileLoginCardDisplayed = useSelector((state: RootState) => state.login.isMobileLoginCardOpened);
     const isMobileRegisterCardDisplayed = useSelector((state: RootState) => state.login.isMobileRegisterCardOpened);
+    const isMobileCartOpened = useSelector((state: RootState) => state.login.isMobileCartOpened);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const [isRightSideDrawerDisplayed, setIsRightSideDrawerDisplayed] = useState<IState["isRightSideDrawerDisplayed"]>(false)
@@ -51,7 +56,6 @@ const LandingPage = () => {
             dispatch(mobileLoginReducer(true));
             navigate("/mobileLogin");
         }
-
     }
 
     const handleResize = () => {
@@ -61,12 +65,14 @@ const LandingPage = () => {
         else if (window.innerWidth < 1200 && isMobileRegisterCardDisplayed) {
             navigate("/mobileRegister")
         }
+        else if (window.innerWidth < 1200 && isMobileCartOpened) {
+            navigate("/cart")
+        }
         else {
             navigate("/")
         }
     }
 
-    // create an event listener
     useEffect(() => {
         window.addEventListener("resize", handleResize);
 
@@ -74,6 +80,16 @@ const LandingPage = () => {
             window.removeEventListener('resize', handleResize);
         };
     })
+
+
+    const cartIconEventHandler = () => {
+        console.log("sdbvsdkjbsdkf");
+        if (window.innerWidth > 1200) dispatch(cartToggleReducer(true));
+        else {
+            dispatch(cartToggleMobileReducer(true));
+            navigate("/cart");
+        }
+    }
 
     return (
         <Box sx={landingPageStyles.mainContainer}>
@@ -88,6 +104,14 @@ const LandingPage = () => {
                         <Box component="button" sx={landingPageStyles.backgroundColorContainer} onClick={userProfileEventHandler}>
                             <Box component="img" sx={landingPageStyles.userProfileImage} src={userProfileImageUrl} alt="user-profile-image" />
                         </Box>
+                        {parsedLoggedInUserCredentials &&
+                            (<Box component="button" sx={landingPageStyles.backgroundColorContainer} onClick={cartIconEventHandler}>
+                                <Box component="img" sx={landingPageStyles.userProfileImage} src={cartImage} alt="cart-image" />
+                                <Box sx={landingPageStyles.cartItemsCount}>
+                                    6
+                                </Box>
+                            </Box>)
+                        }
                     </Box>
                 </Box>
             </Box>
@@ -105,7 +129,6 @@ const LandingPage = () => {
                 <DealsOftheDay />
                 <Testmonials />
                 <LatestNews />
-
             </Box>
             <Footer />
             <Box sx={isRightSideDrawerDisplayed ? landingPageStyles.backgroundModalContainerOpened : landingPageStyles.backgroundModalContainerClosed}>
@@ -149,6 +172,7 @@ const LandingPage = () => {
             </Box>
             <Login />
             <Register />
+            <DesktopCart />
         </Box>
     )
 }
