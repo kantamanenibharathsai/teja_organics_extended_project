@@ -18,11 +18,12 @@ import LatestNews from "../../components/latest_news/LatestNews"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store/Store"
 import Login from "../../components/login/Login"
-import { cartToggleMobileReducer, cartToggleReducer, loginReducer, mobileLoginReducer } from "../../redux/reducers/LoginSliceReducer"
+import { cartToggleMobileReducer, cartToggleReducer, loginProfileReducer, loginReducer, mobileLoginReducer } from "../../redux/reducers/LoginSliceReducer"
 import Register from "../../components/register/Register"
 import { useNavigate } from "react-router-dom"
 import { cartImage } from "../../assets/home_images/HomeImages";
 import DesktopCart from "../../components/desktop_cart/DesktopCart"
+import Profile from "../../components/profile/Profile"
 
 interface IState {
     isRightSideDrawerDisplayed: boolean
@@ -51,7 +52,11 @@ const LandingPage = () => {
 
     const userProfileEventHandler = () => {
         console.log(window.innerWidth);
-        if (window.innerWidth > 1200) dispatch(loginReducer(true));
+        if (parsedLoggedInUserCredentials) {
+            dispatch(loginReducer(false))
+            dispatch(loginProfileReducer(true))
+        }
+        else if (window.innerWidth > 1200) dispatch(loginReducer(true));
         else {
             dispatch(mobileLoginReducer(true));
             navigate("/mobileLogin");
@@ -171,6 +176,7 @@ const LandingPage = () => {
 
             </Box>
             <Login />
+            <Profile/>
             <Register />
             <DesktopCart />
         </Box>

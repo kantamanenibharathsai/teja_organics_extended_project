@@ -45,6 +45,7 @@ const Login = () => {
                 userDetailsObj.email === data.email && userDetailsObj.password === data.password
         );
         if (user) {
+            dispatch(loginReducer(false))
             localStorage.setItem("succLoggedInUserDetails", JSON.stringify(user));
             setTimeout(() => {
                 navigate("/");
