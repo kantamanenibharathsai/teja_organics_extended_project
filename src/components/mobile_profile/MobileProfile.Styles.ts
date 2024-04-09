@@ -1,4 +1,4 @@
-const mobileRegisterStyles = {
+const mobileProfileStyles = {
   cardOpenParentContainer: {
     position: "absolute",
     transition: "2s ease",
@@ -8,6 +8,7 @@ const mobileRegisterStyles = {
     justifyContent: "center",
     opacity: 1,
     height: "100vh",
+    border: "4px solid yellow",
   },
 
   cardCloseParentContainer: {
@@ -57,73 +58,9 @@ const mobileRegisterStyles = {
     opcaity: 0,
   },
 
-  cardChildContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-  },
-
   heading: {
     font: "600 22px Montserrat",
     color: "#32373C",
-  },
-
-  labelInputContainer: {
-    border: "2px solid #7EAD20",
-    padding: "10px 14px",
-    display: "flex",
-    flexDirection: "column",
-    gap: 0.6,
-    borderRadius: "12px",
-    width: "100%",
-  },
-
-  label: {
-    font: "600 13px Montserrat",
-    color: "#32373C",
-    width: "100%",
-    opacity: 0.6,
-  },
-
-  inputFeild: {
-    border: "none",
-    outline: "none",
-    font: "500 15px Montserrat",
-    color: "#32373C",
-    width: "100%",
-  },
-
-  rememberMe: {
-    font: "500 15px Poppins",
-    color: "#32373C",
-  },
-
-  backToHomeBtn: {
-    background: "#056839",
-    height: "44px",
-    alignSelf: "strech",
-    color: "#fff",
-    font: "600 14px Poppins",
-    borderRadius: "13px",
-    "&:hover": {
-      background: "#056839",
-      height: "44px",
-      alignSelf: "strech",
-      color: "#fff",
-      font: "600 14px Poppins",
-      borderRadius: "13px",
-    },
-  },
-
-  commonStyle: {
-    font: "500 14px Poppins",
-    color: "#32373C",
-  },
-
-  clickHereText: {
-    font: "500 14px Poppins",
-    color: "#056839",
-    cursor: "pointer",
   },
 
   drawerCloseIconBtn: {
@@ -151,34 +88,55 @@ const mobileRegisterStyles = {
     color: "#fff",
   },
 
-  privacyPolicy: {
-    font: "500 14px Poppins",
+  profileImg: {
+    width: "100px",
+    height: "100px",
+    borderRadius: "15px",
+  },
+
+  profileName: {
+    font: "600 14px Montserrat",
     color: "#32373C",
   },
 
-  alreadyRegistered: {
-    font: "500 14px Poppins",
-    color: "#32373C",
-  },
-
-  clickHere: {
-    font: "500 14px Poppins",
+  phoneNum: {
+    font: "500 10px Montserrat",
     color: "#056839",
-    borderBottom: "1px solid #056839",
+  },
+
+  bgColorContainer: {
+    background: "#EAEEF3",
+    width: "70px",
+    height: "70px",
+    borderRadius: "20px",
+    display: "grid",
+    placeItems: "center",
+  },
+
+  icon: {
+    width: "16px",
+    height: "16px",
+  },
+
+  imageText: {
+    font: "200 10px Montserrat",
+    color: "#1D2027",
+    mt: -2,
+  },
+
+  smallIcon: {
+    width: "12px",
+    height: "12px",
+  },
+
+  iconText: {
+    font: "200 11px Montserrat",
+    color: "#989898",
+  },
+
+  cursor: {
     cursor: "pointer",
-    mt: 0.5,
-  },
-
-  errorMsg: {
-    color: "red",
-    font: "200 11px Poppins",
-  },
-
-  registrationSuccessMsg: {
-    color: "blue",
-    font: "200 16px Poppins",
-    mt: 2,
   },
 };
 
-export default mobileRegisterStyles;
+export default mobileProfileStyles;

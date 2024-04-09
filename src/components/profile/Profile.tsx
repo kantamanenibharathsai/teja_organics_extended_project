@@ -1,7 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material"
 import { AppDispatch, RootState } from "../../redux/store/Store";
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import profileStyles from "./Profile.Styles";
 import { useDispatch, useSelector } from "react-redux";
 import CloseIcon from '@mui/icons-material/Close';
@@ -20,7 +18,6 @@ import { editProfileImg, notificationImg, orderImg, whishlistImg } from "../../a
 
 const Profile = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const navigate = useNavigate();
     const isLoginProfileCardOpened = useSelector((state: RootState) => state.login.isLoginProfileOpened);
 
     const closeBtnDrawerHandler = () => {
@@ -65,7 +62,7 @@ const Profile = () => {
                     </Box>
 
                     <Box sx={profileStyles.bgColorContainer}>
-                        <Box component={"img"} src={notificationImg} alt="icon-img" sx={profileStyles.icon} />
+                        <Box component={"img"} src={whishlistImg} alt="icon-img" sx={profileStyles.icon} />
                         <Typography sx={profileStyles.imageText}>Wishlist</Typography>
                     </Box>
                 </Stack>
@@ -79,7 +76,7 @@ const Profile = () => {
 
 
                     <Stack direction={"row"} alignItems={"center"} gap={1}>
-                        <Box component={"img"} src={privacyPolicyImg} alt="security-img" sx={profileStyles.smallIcon}/>
+                        <Box component={"img"} src={privacyPolicyImg} alt="security-img" sx={profileStyles.smallIcon} />
                         <Typography sx={profileStyles.iconText}>Privacy Policy</Typography>
                     </Stack>
 

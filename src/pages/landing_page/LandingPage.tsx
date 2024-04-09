@@ -18,7 +18,7 @@ import LatestNews from "../../components/latest_news/LatestNews"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store/Store"
 import Login from "../../components/login/Login"
-import { cartToggleMobileReducer, cartToggleReducer, loginProfileReducer, loginReducer, mobileLoginReducer } from "../../redux/reducers/LoginSliceReducer"
+import { cartToggleMobileReducer, cartToggleReducer, loginProfileReducer, loginReducer, mobileLoginProfileReducer, mobileLoginReducer } from "../../redux/reducers/LoginSliceReducer"
 import Register from "../../components/register/Register"
 import { useNavigate } from "react-router-dom"
 import { cartImage } from "../../assets/home_images/HomeImages";
@@ -51,10 +51,15 @@ const LandingPage = () => {
     }
 
     const userProfileEventHandler = () => {
-        console.log(window.innerWidth);
-        if (parsedLoggedInUserCredentials) {
+        // console.log(window.innerWidth);
+        if (parsedLoggedInUserCredentials && window.innerWidth <= 1200) {
+            dispatch(mobileLoginProfileReducer(true))
             dispatch(loginReducer(false))
             dispatch(loginProfileReducer(true))
+        }
+        else if (parsedLoggedInUserCredentials && window.innerWidth > 1200) {
+            dispatch(mobileLoginProfileReducer(true))
+            dispatch(mobileLoginReducer(false))
         }
         else if (window.innerWidth > 1200) dispatch(loginReducer(true));
         else {
@@ -176,7 +181,7 @@ const LandingPage = () => {
 
             </Box>
             <Login />
-            <Profile/>
+            <Profile />
             <Register />
             <DesktopCart />
         </Box>

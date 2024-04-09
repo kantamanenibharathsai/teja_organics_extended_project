@@ -16,8 +16,6 @@ interface FormData {
 
 
 const MobileLogin = () => {
-    // const loggedInUserCredentialsStringifiedData = localStorage.getItem("loggedInUserCredentials")
-    // const parsedDataCredentials = loggedInUserCredentialsStringifiedData ? JSON.parse(loggedInUserCredentialsStringifiedData) : null;
     const isMobileLoginCardDisplayed = useSelector((state: RootState) => state.login.isMobileLoginCardOpened);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
@@ -89,7 +87,6 @@ const MobileLogin = () => {
 
     return (
         <Box sx={isMobileLoginCardDisplayed ? mobileLoginStyles.cardOpenParentContainer : mobileLoginStyles.cardCloseParentContainer}>
-
             <Box sx={isMobileLoginCardDisplayed ? mobileLoginStyles.cardOpenContainer : mobileLoginStyles.cardCloseContainer}>
                 <Box component="form" sx={mobileLoginStyles.cardChildContainer}
                     onSubmit={handleSubmit(onSubmit)}
@@ -107,7 +104,6 @@ const MobileLogin = () => {
                             </Box>
                             <Box component={"input"} sx={mobileLoginStyles.inputFeild}
                                 type="email"
-                                // value={parsedDataCredentials ? parsedDataCredentials.email : ""}
                                 {...register("email", {
                                     required: {
                                         value: true,
@@ -127,7 +123,6 @@ const MobileLogin = () => {
                                 Password *
                             </Box>
                             <Box component={"input"} sx={mobileLoginStyles.inputFeild}
-                                // value={parsedDataCredentials ? parsedDataCredentials.password : ""}
                                 {...register("password", {
                                     required: {
                                         value: true,

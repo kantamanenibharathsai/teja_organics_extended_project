@@ -8,6 +8,7 @@ const initialState = {
   isCartCardOpened: false,
   isMobileCartOpened: false,
   isLoginProfileOpened: false,
+  isMobileLoginProfileOpened: false,
 };
 
 const LoginSlice = createSlice({
@@ -24,6 +25,10 @@ const LoginSlice = createSlice({
 
     loginProfileReducer: (state, action: PayloadAction<boolean>) => {
       state.isLoginProfileOpened = action.payload;
+    },
+
+    mobileLoginProfileReducer: (state, action: PayloadAction<boolean>) => {
+      state.isMobileLoginProfileOpened = action.payload;
     },
 
     registerReducer: (state, action: PayloadAction<boolean>) => {
@@ -52,5 +57,6 @@ export const {
   mobileRegisterReducer,
   cartToggleReducer,
   cartToggleMobileReducer,
-  loginProfileReducer
+  loginProfileReducer,
+  mobileLoginProfileReducer,
 } = LoginSlice.actions;
