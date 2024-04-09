@@ -12,28 +12,32 @@ import settingsImg from "../../assets/loggedin_profilecard_images/settings.png";
 import termsAndConditionsImg from "../../assets/loggedin_profilecard_images/termsAndConditions.png";
 import privacyPolicyImg from "../../assets/loggedin_profilecard_images/privacyPolicy.png";
 import { editProfileImg, notificationImg, orderImg, whishlistImg } from "../../assets/loggedin_profilecard_images/ProfilecardImages"
+import { useNavigate } from "react-router-dom";
 
 
 const MobileProfile = () => {
     const dispatch = useDispatch<AppDispatch>();
     const isMobileProfileOpened = useSelector((state: RootState) => state.login.isMobileLoginProfileOpened);
+    const navigate = useNavigate()
 
 
 
     const closeBtnDrawerHandler = () => {
         dispatch(mobileLoginProfileReducer(false))
+        navigate("/")
     }
 
     const logoutEventHandler = () => {
         dispatch(mobileLoginProfileReducer(false))
         dispatch(mobileLoginReducer(true))
         localStorage.removeItem("succLoggedInUserDetails")
+        navigate("/")
     }
 
     return (
         <Box sx={isMobileProfileOpened ? mobileProfileStyles.cardOpenParentContainer : mobileProfileStyles.cardCloseParentContainer}>
             <Box sx={isMobileProfileOpened ? mobileRegisterStyles.cardOpenContainer : mobileProfileStyles.cardCloseContainer}>
-                <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
+                <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} >
                     <Typography sx={mobileProfileStyles.heading}>Profile</Typography>
                     <Box component="button" sx={mobileProfileStyles.drawerCloseIconBtn}><CloseIcon onClick={closeBtnDrawerHandler} sx={mobileRegisterStyles.closeIcon} /></Box>
                 </Stack>

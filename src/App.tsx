@@ -11,6 +11,7 @@ import Cart from './components/cart/Cart';
 import Contactpage from './pages/contact_page/Contact';
 import TestimonialsPage from './pages/testimonials_page/TestimonialsPage';
 import AboutUs from './pages/about_us/AboutUs';
+import MobileProfile from './components/mobile_profile/MobileProfile';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route element={<Contactpage />} path="/contact" />
           <Route element={<TestimonialsPage />} path="/testimonials" />
           <Route element={<AboutUs />} path="/aboutus" />
+          <Route element={<MobileProfile />} path="/mobileProfile" />
         </Routes>
       </BrowserRouter>
     </Provider>

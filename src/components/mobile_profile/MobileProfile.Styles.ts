@@ -37,6 +37,9 @@ const mobileProfileStyles = {
     overflowX: "hidden",
     opacity: 1,
     transition: "1s ease all",
+    display: "flex",
+    flexDirection: "column",
+    gap: 3,
   },
 
   cardCloseContainer: {
@@ -49,13 +52,14 @@ const mobileProfileStyles = {
     zIndex: 1,
     top: "0px",
     right: 0,
-    display: "flex",
-    flexDirection: "column",
     justifyContent: "center",
     width: 0,
     overflowX: "hidden",
     transition: "1s ease all",
     opcaity: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: 3,
   },
 
   heading: {
@@ -106,20 +110,20 @@ const mobileProfileStyles = {
 
   bgColorContainer: {
     background: "#EAEEF3",
-    width: "70px",
-    height: "70px",
+    width: "65px",
+    height: "65px",
     borderRadius: "20px",
     display: "grid",
     placeItems: "center",
   },
 
   icon: {
-    width: "16px",
-    height: "16px",
+    width: "14px",
+    height: "14px",
   },
 
   imageText: {
-    font: "200 10px Montserrat",
+    font: "200 8px Montserrat",
     color: "#1D2027",
     mt: -2,
   },

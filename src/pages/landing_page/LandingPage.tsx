@@ -55,11 +55,13 @@ const LandingPage = () => {
         if (parsedLoggedInUserCredentials && window.innerWidth <= 1200) {
             dispatch(mobileLoginProfileReducer(true))
             dispatch(loginReducer(false))
-            dispatch(loginProfileReducer(true))
+            dispatch(loginProfileReducer(false))
+            navigate("/mobileProfile")
         }
         else if (parsedLoggedInUserCredentials && window.innerWidth > 1200) {
-            dispatch(mobileLoginProfileReducer(true))
+            dispatch(mobileLoginProfileReducer(false))
             dispatch(mobileLoginReducer(false))
+            dispatch(loginProfileReducer(true))
         }
         else if (window.innerWidth > 1200) dispatch(loginReducer(true));
         else {
