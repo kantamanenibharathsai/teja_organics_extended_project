@@ -30,7 +30,7 @@ const MobileRegister = () => {
 
     const isMobileRegisterCardDisplayed = useSelector((state: RootState) => state.login.isMobileRegisterCardOpened);
     const dispatch = useDispatch<AppDispatch>();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const closeBtnDrawerHandler = () => {
         dispatch(mobileLoginReducer(false))

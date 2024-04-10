@@ -34,6 +34,10 @@ const MobileProfile = () => {
         navigate("/")
     }
 
+    const wishListHandler = () => {
+        navigate("/wishlist");
+    }
+
     return (
         <Box sx={isMobileProfileOpened ? mobileProfileStyles.cardOpenParentContainer : mobileProfileStyles.cardCloseParentContainer}>
             <Box sx={isMobileProfileOpened ? mobileRegisterStyles.cardOpenContainer : mobileProfileStyles.cardCloseContainer}>
@@ -61,7 +65,7 @@ const MobileProfile = () => {
                         <Box component={"img"} src={notificationImg} alt="icon-img" sx={mobileProfileStyles.icon} />
                         <Typography sx={mobileProfileStyles.imageText}>Notification</Typography>
                     </Box>
-                    <Box sx={mobileProfileStyles.bgColorContainer}>
+                    <Box sx={mobileProfileStyles.bgColorContainer} onClick={wishListHandler}>
                         <Box component={"img"} src={whishlistImg} alt="icon-img" sx={mobileProfileStyles.icon} />
                         <Typography sx={mobileProfileStyles.imageText}>Wishlist</Typography>
                     </Box>

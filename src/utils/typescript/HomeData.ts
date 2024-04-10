@@ -11,6 +11,7 @@ export interface BestSellersCardInterface {
   productImg: string;
   productRating: number | null;
   productQuantity: number;
+  isWishListed : boolean
 }
 
 export interface CartProductInterface extends BestSellersCardInterface {}
@@ -22,6 +23,7 @@ export const bestSellersCardsList: BestSellersCardInterface[] = [
     productImg: blueTeaImg,
     productRating: null,
     productQuantity: 0,
+    isWishListed : false
   },
   {
     productId: 2,
@@ -29,6 +31,7 @@ export const bestSellersCardsList: BestSellersCardInterface[] = [
     productImg: peppermintTeaImg,
     productRating: 5,
     productQuantity: 0,
+    isWishListed : false
   },
   {
     productId: 3,
@@ -36,6 +39,7 @@ export const bestSellersCardsList: BestSellersCardInterface[] = [
     productImg: lemonGrassTeaImg,
     productRating: null,
     productQuantity: 0,
+    isWishListed : false
   },
   {
     productId: 4,
@@ -43,5 +47,6 @@ export const bestSellersCardsList: BestSellersCardInterface[] = [
     productImg: burdockTeaImg,
     productRating: null,
     productQuantity: 0,
+    isWishListed : false
   },
 ];

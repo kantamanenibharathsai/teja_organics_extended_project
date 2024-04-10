@@ -32,7 +32,6 @@ const CartSlice = createSlice({
         )
       )
         return;
-      //   console.log(action.payload);
       const newProduct = { ...action.payload, productQuantity: 1 };
       state.cartProducts = [...state.cartProducts, newProduct];
     },

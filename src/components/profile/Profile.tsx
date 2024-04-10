@@ -11,6 +11,7 @@ import settingsImg from "../../assets/loggedin_profilecard_images/settings.png";
 import termsAndConditionsImg from "../../assets/loggedin_profilecard_images/termsAndConditions.png";
 import privacyPolicyImg from "../../assets/loggedin_profilecard_images/privacyPolicy.png";
 import { editProfileImg, notificationImg, orderImg, whishlistImg } from "../../assets/loggedin_profilecard_images/ProfilecardImages"
+import { useNavigate } from "react-router";
 
 
 
@@ -19,6 +20,7 @@ import { editProfileImg, notificationImg, orderImg, whishlistImg } from "../../a
 const Profile = () => {
     const dispatch = useDispatch<AppDispatch>();
     const isLoginProfileCardOpened = useSelector((state: RootState) => state.login.isLoginProfileOpened);
+    const navigate = useNavigate();
 
     const closeBtnDrawerHandler = () => {
         dispatch(loginProfileReducer(false))
@@ -28,6 +30,11 @@ const Profile = () => {
         dispatch(loginProfileReducer(false))
         dispatch(loginReducer(true))
         localStorage.removeItem("succLoggedInUserDetails")
+    }
+
+
+    const wishListHandler = () => {
+        navigate("/wishlist");
     }
 
 
@@ -61,7 +68,7 @@ const Profile = () => {
                         <Typography sx={profileStyles.imageText}>Notification</Typography>
                     </Box>
 
-                    <Box sx={profileStyles.bgColorContainer}>
+                    <Box sx={profileStyles.bgColorContainer} onClick={wishListHandler}>
                         <Box component={"img"} src={whishlistImg} alt="icon-img" sx={profileStyles.icon} />
                         <Typography sx={profileStyles.imageText}>Wishlist</Typography>
                     </Box>

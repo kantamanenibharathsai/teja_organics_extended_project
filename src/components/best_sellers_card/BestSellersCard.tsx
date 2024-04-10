@@ -7,7 +7,7 @@ import { AppDispatch, RootState } from "../../redux/store/Store"
 import { singleProductReducer } from "../../redux/reducers/SingleProductReducer"
 import { useNavigate } from "react-router-dom"
 import { addToCart, cartDecrement, cartIncrement } from "../../redux/reducers/CartSliceReducer"
-
+import heartFilledImg from "../../assets/home_images/heartFilledIcon.png"
 
 interface MyProps {
     eachProduct: BestSellersCardInterface
@@ -17,7 +17,7 @@ interface MyProps {
 const BestSellerCard = ({ eachProduct }: MyProps) => {
     const requiredCartProduct = useSelector((state: RootState) => state.cart.cartProducts.find(product => product.productId === eachProduct.productId))
     // console.log(requiredCartProduct);
-    const { productId, productName, productImg, productRating, } = eachProduct;
+    const { productId, productName, productImg, productRating, isWishListed} = eachProduct;
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
@@ -53,7 +53,8 @@ const BestSellerCard = ({ eachProduct }: MyProps) => {
         <Box sx={bestSellersCardStyles.cardContainer} onClick={() => handleBestSellerCard(productName, productImg)}>
             <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
                 <Typography sx={bestSellersCardStyles.organicFoodText}>Organic Food</Typography>
-                <Box component={"img"} src={heartImgIcon} alt="heart-image-icon" sx={bestSellersCardStyles.favoriteIconImg} />
+                {!isWishListed && (<Box component={"img"} src={heartImgIcon} alt="heart-image-icon" sx={bestSellersCardStyles.favoriteIconImg} />)}
+                {isWishListed && (<Box component={"img"} src={heartImgIcon} alt="heart-image-icon" sx={bestSellersCardStyles.favoriteIconImg} />)}
             </Stack>
             <Stack direction={"row"} justifyContent={"center"} alignItems={"center"}>
                 <Box component={"img"} src={productImg} alt={`product${productId}`} sx={bestSellersCardStyles.productImage} />

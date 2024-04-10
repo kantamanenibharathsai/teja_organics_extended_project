@@ -156,6 +156,7 @@ const profileStyles = {
     borderRadius: "20px",
     display: "grid",
     placeItems: "center",
+    cursor: "pointer"
   },
 
   icon: {
