@@ -3,6 +3,7 @@ import LoginSliceReducer from "../reducers/LoginSliceReducer";
 import SingleProductReducer from "../reducers/SingleProductReducer";
 import CartSliceReducer from "../reducers/CartSliceReducer";
 import NavbarTabsReducer from "../reducers/NavbarTabsReducer";
+import WishListReducer from "../reducers/WishListReducer";
 
 export const Store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const Store = configureStore({
     singleProduct: SingleProductReducer,
     cart: CartSliceReducer,
     navbarTabs: NavbarTabsReducer,
+    wishList : WishListReducer
   },
 });
 

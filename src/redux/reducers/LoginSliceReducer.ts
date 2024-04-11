@@ -9,6 +9,9 @@ const initialState = {
   isMobileCartOpened: false,
   isLoginProfileOpened: false,
   isMobileLoginProfileOpened: false,
+  isForgotPasswordCardDisplayed: false,
+  isMobileFrogotPasswordCardDisplayed: false,
+  isSpinnerRotating : false
 };
 
 const LoginSlice = createSlice({
@@ -46,6 +49,18 @@ const LoginSlice = createSlice({
     cartToggleMobileReducer: (state, action: PayloadAction<boolean>) => {
       state.isMobileCartOpened = action.payload;
     },
+
+    forgotPasswordReducer: (state, action: PayloadAction<boolean>) => {
+      state.isForgotPasswordCardDisplayed = action.payload
+    },
+
+    forgotMobilePasswordReducer: (state, action: PayloadAction<boolean>) => {
+      state.isMobileFrogotPasswordCardDisplayed = action.payload
+    },
+
+    loadingSpinnerReducer: (state, action: PayloadAction<boolean>) =>  {
+      state.isSpinnerRotating = action.payload
+    }
   },
 });
 
@@ -59,4 +74,8 @@ export const {
   cartToggleMobileReducer,
   loginProfileReducer,
   mobileLoginProfileReducer,
+  forgotPasswordReducer,
+  forgotMobilePasswordReducer,
+  loadingSpinnerReducer
+
 } = LoginSlice.actions;

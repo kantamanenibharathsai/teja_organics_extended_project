@@ -3,7 +3,7 @@ import loginStyles from "./Login.Styles"
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store/Store";
 import CloseIcon from '@mui/icons-material/Close';
-import { loginReducer, registerReducer } from "../../redux/reducers/LoginSliceReducer";
+import { forgotPasswordReducer, loginReducer, registerReducer } from "../../redux/reducers/LoginSliceReducer";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -56,6 +56,12 @@ const Login = () => {
         }
         reset();
     };
+
+
+    const forgotPasswordHandler = () => {
+        dispatch(forgotPasswordReducer(true))
+        dispatch(loginReducer(false))
+    }
 
     return (
         <Box sx={isLoginCardDisplayed ? loginStyles.cardOpenParentContainer : loginStyles.cardParentCloseContainer}>
@@ -115,7 +121,7 @@ const Login = () => {
                     <Button disableRipple disableFocusRipple disableTouchRipple disableElevation type="submit" sx={loginStyles.loginBtn}>LOGIN</Button>
                 </Box>
                 <Stack direction={"column"} alignItems={"center"} gap={4} justifyContent={"space-between"} mt={2.5}>
-                    <Typography sx={loginStyles.commonStyle}>Forgot Password?</Typography>
+                    <Typography onClick={forgotPasswordHandler} sx={{...loginStyles.commonStyle, ...loginStyles.forgotPassword}}>Forgot Password?</Typography>
                     <Stack direction={"column"} alignItems={"center"} gap={1} justifyContent={"space-between"}>
                         <Typography sx={loginStyles.commonStyle}>Don’t have an account?</Typography>
                         <Box component="span" onClick={clickHereHandler} sx={loginStyles.clickHereText}>Click here to create new account</Box>

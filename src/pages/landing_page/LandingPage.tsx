@@ -7,7 +7,6 @@ import sidebarMobileImg from "../../assets/home_images/sidebarMobileImg.png"
 import { useEffect, useState } from "react"
 import { facebookImg, instagramImg, linkedinImg, pinInterestImg, twitterImg } from "../../assets/navbar_images/navbarImages"
 import CloseIcon from '@mui/icons-material/Close';
-import { bestSellersCardsList } from "../../utils/typescript/HomeData"
 import BestSellerCard from "../../components/best_sellers_card/BestSellersCard"
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import FreeShipping from "../../components/free_shipping/FreeShipping"
@@ -24,6 +23,7 @@ import { useNavigate } from "react-router-dom"
 import { cartImage } from "../../assets/home_images/HomeImages";
 import DesktopCart from "../../components/desktop_cart/DesktopCart"
 import Profile from "../../components/profile/Profile"
+import ForgotPassword from "../../components/forgot_password/ForgotPassword"
 
 interface IState {
     isRightSideDrawerDisplayed: boolean
@@ -31,7 +31,7 @@ interface IState {
 
 
 const LandingPage = () => {
-    // const isLoginCardDisplayed = useSelector((state: RootState) => state.login.isLoginCardOpened);
+    const bestSellerStoreProducts = useSelector((state: RootState) => state.wishList.bestSellerProducts);
     const succLoggedInUserDetailsStringifiedData = localStorage.getItem("succLoggedInUserDetails");
     const parsedLoggedInUserCredentials = succLoggedInUserDetailsStringifiedData ? JSON.parse(succLoggedInUserDetailsStringifiedData) : null;
     const isMobileLoginCardDisplayed = useSelector((state: RootState) => state.login.isMobileLoginCardOpened);
@@ -131,7 +131,7 @@ const LandingPage = () => {
                 <Stack direction={"column"} gap={3}>
                     <Typography sx={landingPageStyles.commonHeadingStyle}>Our Best Sellers</Typography>
                     <Box component={"ul"} sx={landingPageStyles.bestSellersUnordredList}>
-                        {bestSellersCardsList.map(eachProduct => (
+                        {bestSellerStoreProducts.map(eachProduct => (
                             <BestSellerCard key={eachProduct.productId} eachProduct={eachProduct} />
                         ))}
                         <IconButton disableFocusRipple disableRipple disableTouchRipple sx={landingPageStyles.bestSellerCarouselArrowBtn}><KeyboardArrowRightOutlinedIcon /></IconButton>
@@ -185,6 +185,7 @@ const LandingPage = () => {
             <Login />
             <Profile />
             <Register />
+            <ForgotPassword/>
             <DesktopCart />
         </Box>
     )

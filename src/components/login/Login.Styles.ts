@@ -233,6 +233,11 @@ const loginStyles = {
     color: "red",
     font: "200 11px Poppins",
   },
+
+
+  forgotPassword:{
+    cursor: "pointer"
+  }
 };
 
 export default loginStyles;

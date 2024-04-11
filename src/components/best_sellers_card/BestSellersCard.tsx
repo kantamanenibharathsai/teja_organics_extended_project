@@ -8,6 +8,7 @@ import { singleProductReducer } from "../../redux/reducers/SingleProductReducer"
 import { useNavigate } from "react-router-dom"
 import { addToCart, cartDecrement, cartIncrement } from "../../redux/reducers/CartSliceReducer"
 import heartFilledImg from "../../assets/home_images/heartFilledIcon.png"
+import {wishListToggleReducer} from "../../redux/reducers/WishListReducer"
 
 interface MyProps {
     eachProduct: BestSellersCardInterface
@@ -48,13 +49,19 @@ const BestSellerCard = ({ eachProduct }: MyProps) => {
 
     };
 
+
+    const handleWishListToggle = (event: React.MouseEvent<HTMLImageElement>, productId : number) => {
+        event?.stopPropagation()
+        dispatch(wishListToggleReducer(productId))
+    }
+
     return (
 
         <Box sx={bestSellersCardStyles.cardContainer} onClick={() => handleBestSellerCard(productName, productImg)}>
             <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
                 <Typography sx={bestSellersCardStyles.organicFoodText}>Organic Food</Typography>
-                {!isWishListed && (<Box component={"img"} src={heartImgIcon} alt="heart-image-icon" sx={bestSellersCardStyles.favoriteIconImg} />)}
-                {isWishListed && (<Box component={"img"} src={heartImgIcon} alt="heart-image-icon" sx={bestSellersCardStyles.favoriteIconImg} />)}
+                {!isWishListed && (<Box component={"img"} onClick={(event) => handleWishListToggle(event, productId)} src={heartImgIcon} alt="heart-image-icon" sx={bestSellersCardStyles.favoriteIconImg} />)}
+                {isWishListed && (<Box component={"img"} onClick={(event) => handleWishListToggle(event, productId)} src={heartFilledImg} alt="heart-image-icon" sx={bestSellersCardStyles.favoriteIconImg} />)}
             </Stack>
             <Stack direction={"row"} justifyContent={"center"} alignItems={"center"}>
                 <Box component={"img"} src={productImg} alt={`product${productId}`} sx={bestSellersCardStyles.productImage} />
