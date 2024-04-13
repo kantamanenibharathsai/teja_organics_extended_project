@@ -1,10 +1,10 @@
-const loginStyles = {
+const otpCardStyles = {
   cardOpenParentContainer: {
     position: "absolute",
     top: "190px",
     zIndex: 2,
     transition: "0.7s ease all",
-    width: "495px",
+    width: "395px",
     overflowX: "hidden",
     right: 0,
     display: "flex",
@@ -38,7 +38,7 @@ const loginStyles = {
     zIndex: 1,
     top: "0px",
     right: 0,
-    width: "450px",
+    width: "350px",
     overflowX: "hidden",
     opacity: 1,
     transition: "0.7s ease all",
@@ -61,109 +61,6 @@ const loginStyles = {
     overflowX: "hidden",
     transition: "0.7s ease all",
     opcaity: 0,
-  },
-
-  rightSideDrawer: {
-    height: "100%",
-    width: "0px",
-    position: "absolute",
-    zIndex: 2,
-    top: 0,
-    right: 0,
-    backgroundColor: "#fff",
-    overflowX: "hidden",
-    transition: "0.7s ease all",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    boxShadow:
-      "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-  },
-
-  rightSideDrawerOpened: {
-    height: "100%",
-    width: "250px",
-    position: "absolute",
-    zIndex: 2,
-    top: 0,
-    right: 0,
-    backgroundColor: "#fff",
-    overflowX: "hidden",
-    transition: "0.7s ease all",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    boxShadow:
-      "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-    border: "5px solid yellow",
-  },
-
-  cardChildContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-  },
-
-  heading: {
-    font: "600 22px Montserrat",
-    color: "#32373C",
-  },
-
-  labelInputContainer: {
-    border: "2px solid #7EAD20",
-    padding: "10px 14px",
-    display: "flex",
-    flexDirection: "column",
-    gap: 0.6,
-    borderRadius: "12px",
-  },
-
-  label: {
-    font: "600 13px Montserrat",
-    color: "#32373C",
-    width: "100%",
-    opacity: 0.6,
-  },
-
-  inputFeild: {
-    border: "none",
-    outline: "none",
-    font: "500 15px Montserrat",
-    color: "#32373C",
-    width: "100%",
-  },
-
-  rememberMe: {
-    font: "500 17px Montserrat",
-    color: "#32373C",
-  },
-
-  loginBtn: {
-    background: "#056839",
-    height: "44px",
-    alignSelf: "strech",
-    color: "#fff",
-    font: "600 14px Poppins",
-    borderRadius: "13px",
-    "&:hover": {
-      background: "#056839",
-      height: "44px",
-      alignSelf: "strech",
-      color: "#fff",
-      font: "600 14px Poppins",
-      borderRadius: "13px",
-    },
-  },
-
-  commonStyle: {
-    font: "500 15px Montserrat",
-    color: "#32373C",
-  },
-
-  clickHereText: {
-    font: "500 14px Montserrat",
-    color: "#056839",
-    cursor: "pointer",
   },
 
   drawerCloseIconBtnOpen: {
@@ -229,21 +126,71 @@ const loginStyles = {
     color: "#fff",
   },
 
-  errorMsg: {
-    color: "red",
-    font: "200 11px Poppins",
+  heading: {
+    color: "#32373C",
+    font: "600 17px Montserrat",
+    mb: 3,
   },
 
-
-  forgotPassword:{
-    cursor: "pointer"
+  otpNumsContainer: {
+    display: "flex",
+    flexDirection: "row",
+    gap: "50px",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 
-  loginErrMsg:{
-    font: "600 15px Poppins",
-    color: "red",
-    alignSelf: "flex-start",
-  }
+  continueBtn: {
+    background: "#056839",
+    height: "44px",
+    alignSelf: "strech",
+    color: "#fff",
+    font: "600 14px Poppins",
+    borderRadius: "13px",
+    "&:hover": {
+      background: "#056839",
+      height: "44px",
+      alignSelf: "strech",
+      color: "#fff",
+      font: "600 14px Poppins",
+      borderRadius: "13px",
+    },
+  },
+
+  spinnerContainerStyle: {
+    background: "#f2f7f4",
+    height: "44px",
+    alignSelf: "strech",
+    borderRadius: "13px",
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  spinner: {
+    "&:before": {
+      content: '""',
+      boxSizing: "border-box",
+      position: "absolute",
+      // top: '50%',
+      left: "50%",
+      width: "25px",
+      height: "25px",
+      borderRadius: "50%",
+      border: "1px solid #f6f",
+      borderTopColor: "#0e0",
+      borderRightColor: "#0dd",
+      borderBottomColor: "#f90",
+      animation: "spinnerAnim .6s linear infinite",
+      mt: "-12px",
+    },
+    "@keyframes spinnerAnim": {
+      to: {
+        transform: "rotate(360deg)",
+      },
+    },
+  },
 };
 
-export default loginStyles;
+export default otpCardStyles;

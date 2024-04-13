@@ -11,6 +11,7 @@ import { useState } from "react";
 interface FormData {
     email: string;
     password: string;
+
 }
 
 const Login = () => {
@@ -19,6 +20,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [checked, setChecked] = useState(false);
+    const [logginErrMsg, setLoginErrMsg] = useState("");
     const loggedInUserCredentialsStringifiedData = localStorage.getItem("loggedInUserCredentials")
     const parsedDataCredentials = loggedInUserCredentialsStringifiedData ? JSON.parse(loggedInUserCredentialsStringifiedData) : null;
 
@@ -45,6 +47,7 @@ const Login = () => {
                 userDetailsObj.email === data.email && userDetailsObj.password === data.password
         );
         if (user) {
+            setLoginErrMsg("");
             dispatch(loginReducer(false))
             localStorage.setItem("succLoggedInUserDetails", JSON.stringify(user));
             setTimeout(() => {
@@ -53,6 +56,9 @@ const Login = () => {
             if (checked) {
                 localStorage.setItem("loggedInUserCredentials", JSON.stringify(user))
             }
+        }
+        else {
+            setLoginErrMsg("*Invalid Credentials")
         }
         reset();
     };
@@ -121,10 +127,11 @@ const Login = () => {
                     <Button disableRipple disableFocusRipple disableTouchRipple disableElevation type="submit" sx={loginStyles.loginBtn}>LOGIN</Button>
                 </Box>
                 <Stack direction={"column"} alignItems={"center"} gap={4} justifyContent={"space-between"} mt={2.5}>
-                    <Typography onClick={forgotPasswordHandler} sx={{...loginStyles.commonStyle, ...loginStyles.forgotPassword}}>Forgot Password?</Typography>
+                    <Typography onClick={forgotPasswordHandler} sx={{ ...loginStyles.commonStyle, ...loginStyles.forgotPassword }}>Forgot Password?</Typography>
                     <Stack direction={"column"} alignItems={"center"} gap={1} justifyContent={"space-between"}>
                         <Typography sx={loginStyles.commonStyle}>Don’t have an account?</Typography>
                         <Box component="span" onClick={clickHereHandler} sx={loginStyles.clickHereText}>Click here to create new account</Box>
+                        {logginErrMsg && (<Typography sx={loginStyles.loginErrMsg}>{logginErrMsg}</Typography>)}
                     </Stack>
                 </Stack>
             </Box>

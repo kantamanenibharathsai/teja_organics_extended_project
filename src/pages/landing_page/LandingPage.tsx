@@ -24,6 +24,7 @@ import { cartImage } from "../../assets/home_images/HomeImages";
 import DesktopCart from "../../components/desktop_cart/DesktopCart"
 import Profile from "../../components/profile/Profile"
 import ForgotPassword from "../../components/forgot_password/ForgotPassword"
+import OtpCard from "../../components/otp_card/OtpCard"
 
 interface IState {
     isRightSideDrawerDisplayed: boolean
@@ -186,6 +187,7 @@ const LandingPage = () => {
             <Profile />
             <Register />
             <ForgotPassword/>
+            <OtpCard/>
             <DesktopCart />
         </Box>
     )

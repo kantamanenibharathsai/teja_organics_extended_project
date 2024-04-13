@@ -11,6 +11,8 @@ const initialState = {
   isMobileLoginProfileOpened: false,
   isForgotPasswordCardDisplayed: false,
   isMobileFrogotPasswordCardDisplayed: false,
+  isLoginOtpcardOpened: false,
+  isMobileLoginOtpcardOpened: false,
   isSpinnerRotating : false
 };
 
@@ -32,6 +34,14 @@ const LoginSlice = createSlice({
 
     mobileLoginProfileReducer: (state, action: PayloadAction<boolean>) => {
       state.isMobileLoginProfileOpened = action.payload;
+    },
+
+    loginOtpReducer: (state, action: PayloadAction<boolean>) => {
+      state.isLoginOtpcardOpened = action.payload;
+    },
+
+    mobileLoginOtpReducer: (state, action: PayloadAction<boolean>) => {
+      state.isMobileLoginOtpcardOpened = action.payload;
     },
 
     registerReducer: (state, action: PayloadAction<boolean>) => {
@@ -76,6 +86,8 @@ export const {
   mobileLoginProfileReducer,
   forgotPasswordReducer,
   forgotMobilePasswordReducer,
+  loginOtpReducer,
+  mobileLoginOtpReducer,
   loadingSpinnerReducer
 
 } = LoginSlice.actions;
